@@ -12,8 +12,8 @@ body {
 }
 
 button {
-	background: black;
-	color: white;
+	background: white;
+	color: black;
 	border: none;
 	border-radius: 5px;
 	padding: 5px;
@@ -35,10 +35,10 @@ button {
 	display: none;
 }
 
-#score1 {
+.blue {
 	color: lightblue;
 }
 
-#score2 {
+.green {
 	color: lightgreen;
 }
