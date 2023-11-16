@@ -1,0 +1,36 @@
+html {
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	background: black;
+	color: white;
+	font-family: comic sans ms;
+}
+
+button {
+	background: black;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	padding: 5px;
+	font-family: comic sans ms;
+	cursor: pointer;
+}
+
+#board {
+	display: block;
+	background: black;
+	border: 2px solid white;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#instructions {
+	display: none;
+}
