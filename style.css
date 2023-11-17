@@ -35,6 +35,10 @@ button {
 	display: none;
 }
 
+.gameover {
+	display: none;
+}
+
 .blue {
 	color: lightblue;
 }

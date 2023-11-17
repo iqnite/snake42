@@ -1,5 +1,6 @@
 const START_LEN = 4;
 const PART_SIZE = 10;
+const WIN_SCORE = 10;
 
 const KEY_LEFT = 37;
 const KEY_UP = 38;
@@ -33,6 +34,9 @@ function start() {
 	running = true;
 	restart = false;
 
+	document.getElementById("greengameover").style.display = "none";
+	document.getElementById("bluegameover").style.display = "none";
+	
 	player1 = new Player(gameCanvas.width - START_LEN * PART_SIZE, 0, "lightblue", "darkblue");
 	player2 = new Player(0, 0, "lightgreen", "darkgreen");
 
@@ -46,20 +50,34 @@ function start() {
 function main() {
 	player1.changingDirection = false;
 	player2.changingDirection = false;
-	if (player1.dead() || player1.collide(player2)) {
+	if (player1.score >= WIN_SCORE) {
+		showWin(player1);
+	} else if (player2.score >= WIN_SCORE) {
+		showWin(player2);
+	} else if (player1.dead()) {
 		player1.score = player1.score * -1;
 		updateScore();
+		showWin(player2);
 		running = false;
-	} else if (player2.dead() || player2.collide(player1)) {
+	} else if (player2.dead()) {
 		player2.score = player2.score * -1;
 		updateScore();
+		showWin(player1);
 		running = false;
 	} else setTimeout(() => {
 		clearCanvas();
 		player1.move();
 		player1.draw();
+		if (player1.collide(player2)) {
+			player2.score++;
+			updateScore();
+		}
 		player2.move();
 		player2.draw();
+		if (player2.collide(player1)) {
+			player1.score++;
+			updateScore();
+		}
 		drawFood();
 		main()
 	}, 100);
@@ -115,6 +133,11 @@ function updateScore() {
 	document.getElementById("score2").innerHTML = player2.score;
 }
 
+function showWin(player) {
+	if (player === player2) document.getElementById("greengameover").style.display = "block";
+	else document.getElementById("bluegameover").style.display = "block";
+}
+
 class Player {
 	constructor(x, y, color, stroke) {
 		this.color = color;
@@ -145,7 +168,7 @@ class Player {
 			x: this.snake[0].x + this.dx,
 			y: this.snake[0].y + this.dy
 		});
-		if (this.snake[0].x === food.x && this.snake[0].y === food.y) {
+		if ((this.snake[0].x === food.x && this.snake[0].y === food.y)) {
 			this.score++;
 			updateScore();
 			generateFood();
