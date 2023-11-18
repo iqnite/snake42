@@ -1,4 +1,4 @@
-# snake42
+# snake 4 2
 Snake game for 2 players!
 
-## UNDER CONSTRUCTION
+Launch the index.html file in your browser and play directly from there. All instructions are contained in-game.
